@@ -1,5 +1,3 @@
-package br.com.autocom.acposto.util;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
