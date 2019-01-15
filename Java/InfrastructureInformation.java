@@ -24,7 +24,7 @@ public class InfrastructureInformation {
         System.out.println("11 - Separador de arquivo: " + System.getProperty("file.separator"));
         System.out.println("12 - Separador de pasta: " + System.getProperty("path.separator"));
         System.out.println("13 - Separador de linha (unix) (\\n): " + System.getProperty("line.separator").equals("\n"));
-        System.out.println("14 - Separador de linha (windows) (\\r\\n): " + System.getProperty("line.separator").equals("\\r\n"));
+        System.out.println("14 - Separador de linha (windows) (\\r\\n): " + System.getProperty("line.separator").equals("\r\n"));
         System.out.println("15 - Usuário logado: " + System.getProperty("user.name"));
         System.out.println("16 - Diretório do usuário: " + System.getProperty("user.home"));
         System.out.println("17 - Diretório da aplicação: " + System.getProperty("user.dir"));
