@@ -1,0 +1,52 @@
+# Listando Certificado:
+keytool -list -v -keystore <nome_do_keystore> [-storepass <senha>]
+
+# Gerando KEY:
+# Certificado Auto assinado:
+keytool -genkey -alias [nome do alias] -keyalg RSA -keystore [nome do arquivo].jks -keysize 2048 -sigalg SHA256withRSA -validity 1095 -storepass [senha do cert]
+
+# Certificado Real:
+keytool -genkey -alias [nome do alias] -keyalg RSA -keystore [nome do arquivo].jks -keysize 2048 -sigalg SHA256withRSA -storepass [senha do cert]
+
+# Responder às perguntas:
+# CN=www.seudominio.com, OU=Departamento, O=Razão Social, L=Sua Cidade, ST=Seu Estado, C=BR correct?
+#	* Enter keystore password: (Parâmetro normalmente deixado em branco)
+# (NOTA: guarde esta senha para poder acessar o keystore pela aplicação)
+
+	* What is your first and last name? (Este é o Common Name - host + domínio): 
+Ex: www.meudominio.com.br
+
+	* What is the name of your organizational unit? 
+(Preenchimento livre - Ex. setor):  Tecnologia
+
+	* What is the name of your organization? 
+(Razão Social completa como consta no CNPJ): Minha Empresa LTDA
+
+	* What is the name of your City or Locality? 
+(Cidade, por extenso): Ex. Rio de Janeiro
+
+	* What is the name of your State or Province? 
+(Estado, por extenso): Ex. Rio de Janeiro
+
+	* What is the two-letter country code for this unit? - 
+(Sigla do País, com duas letras): BR
+
+# Gerando CSR:
+keytool -certreq -keyalg RSA -alias [alias do certificado] -file [nome do arquivo].csr  -keystore [nome do keystore].jks -storepass [senha do cert]
+
+# Importando ROOT:
+keytool -import -alias root -keystore [nome do keystore].jks -trustcacerts -file [nome do CA ROOT].cer -storepass [senha do cert]
+
+# Importando CA:
+keytool -import -alias emissora -keystore [nome do keystore].jks -trustcacerts -file [nome do CA EMISSORA].cer -storepass [senha do cert]
+
+# Importando Certificado:
+keytool -import -alias [nome do alias] -keystore [nome do keystore].jks -file [nome do certificado].cer -storepass [senha do cert]
+
+# Removendo um Alias:
+keytool -delete -alias [nome do alias] -keystore [nome do keystore].jks
+
+# Gerando um PKCS à partir de um JKS:
+keytool -importkeystore -srckeystore [nome do keystore].jks -destkeystore [nome do cert].p12  -srcstoretype JKS -deststoretype PKCS12 -deststorepass [PASSWORD_PKCS12]  -srcalias [ALIAS_SRC] -destalias [ALIAS_DEST]
+
+# Fonte: https://www.comodobr.com/suporte/manual_tomcat.php
